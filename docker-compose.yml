@@ -1,0 +1,25 @@
+version: '3'
+volumes:
+  dados:
+networks: 
+  pgDBnet:
+    driver: bridge
+services:
+  pgDB:
+    image: postgres:9.6.15-alpine
+    container_name: postgres_platcorp
+    restart: always
+    volumes:
+      # dados
+      - dados:/var/lib/postgresql/data
+      # scripts
+      - ./scripts:/scripts
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - TZ=America/Sao_Paulo
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    networks: 
+      - pgDBnet
