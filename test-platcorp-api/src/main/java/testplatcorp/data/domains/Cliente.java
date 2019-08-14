@@ -11,13 +11,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity
 @Table(name="client")
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({"clienteId", "nome", "idade", "clienteInfo"})
 public class Cliente implements Serializable 
 {
 	private static final long serialVersionUID = 1L;
@@ -28,9 +36,14 @@ public class Cliente implements Serializable
 	@JsonProperty("client_id")
 	private Integer clienteId;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	@Column(name = "client_name", length=100, nullable = false)
 	private String nome;
 	
+	@NotNull(message = "Informe a idade")
+	@Min(18)
+	@Max(99)
 	@Column(name = "client_age", length=1, nullable = false)
 	private Short idade;
 	

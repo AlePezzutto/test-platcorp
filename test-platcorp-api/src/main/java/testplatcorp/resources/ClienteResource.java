@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,9 @@ import testplatcorp.services.ClienteService;
 @RequestMapping(value="/api/v1/cliente")
 public class ClienteResource {
 
+	@Value("${spring.profiles.active}")
+	private String activeProfile;
+	
 	@Autowired
 	private ClienteService service;
 	
@@ -44,11 +48,15 @@ public class ClienteResource {
 	@PostMapping(value="/")
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto,  HttpServletRequest request) {
 		
-		// Obtem o IP da requisição
-		String ip = request.getRemoteAddr();
 		
-		// Para testar via eclipse. COMENTAR DEPOIS
-		ip = "179.99.148.36";
+		String ip;
+		
+		// Obtem o IP da requisição
+		if(activeProfile.equals("prod"))
+			ip = request.getRemoteAddr();
+		else	
+			ip = "179.99.148.36";
+		
 		Cliente obj = service.fromDTO(objDto);
 		obj.setClienteId(null);
 		obj = service.insert(obj, ip);

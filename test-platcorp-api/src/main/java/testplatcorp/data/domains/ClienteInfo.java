@@ -10,10 +10,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity
 @Table(name="client_info")
+@JsonPropertyOrder({"id", "ip", "dataCriacao", "tempAtual", "tempMinima", "tempMaxima"})
 public class ClienteInfo implements Serializable 
 {
 	private static final long serialVersionUID = 1L;
@@ -24,6 +27,7 @@ public class ClienteInfo implements Serializable
 	private Integer id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "create_dt", nullable = false)
 	private Date dataCriacao;
 	

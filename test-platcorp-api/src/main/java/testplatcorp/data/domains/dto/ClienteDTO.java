@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import testplatcorp.data.domains.Cliente;
+
 public class ClienteDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -59,4 +61,7 @@ public class ClienteDTO implements Serializable {
 		this.idade = idade;
 	}
 
+	public Cliente toCliente() {
+		return new Cliente(this.clienteId, this.nome, this.idade);
+	}
 }

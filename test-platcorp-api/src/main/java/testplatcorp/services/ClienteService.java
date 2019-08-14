@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import testplatcorp.data.domains.Cliente;
+import testplatcorp.data.domains.ClienteInfo;
 import testplatcorp.data.domains.dto.ClienteDTO;
 import testplatcorp.repositories.ClienteRepository;
 import testplatcorp.services.exceptions.ObjectNotFoundException;
@@ -39,8 +40,9 @@ public class ClienteService {
 		Cliente objEdit = clienteRepo.save(obj);
 		
 		System.out.println("IP Origem: " + ip);
-		
-		objEdit.setClienteInfo(cliInfoService.insert(objEdit.getClienteId(), ip));
+		System.out.println("ID CLIENTE GERADO ==> " + objEdit.getClienteId());
+		ClienteInfo cliInfo = cliInfoService.insert(objEdit.getClienteId(), ip);
+		objEdit.setClienteInfo(cliInfo);
 				
 		return objEdit;
 	}

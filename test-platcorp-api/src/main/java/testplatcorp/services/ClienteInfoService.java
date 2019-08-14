@@ -88,7 +88,6 @@ public class ClienteInfoService {
 	private IpVigilanteDetail getGeoLocalizacaoPorIP(String ip) {
 
 	    RestTemplate restTemplate = new RestTemplate();
-		System.out.println("Vai buscar geo-localização. IP: " + ip);
 		IpVigilante dados = restTemplate.getForObject(String.format(uriGeoLocalizacao,  ip), IpVigilante.class);
 		
 	    return dados.getDetails();
@@ -96,8 +95,6 @@ public class ClienteInfoService {
 	
 	private List<MWLocationCity> getLocalizacaoWoeid(String lt, String lg) {
 		
-		System.out.println("Vai buscar getLocalizacaoWoeid. lat:long: " + lt + ":" + lg);
-	    
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<List<MWLocationCity>> response = restTemplate.exchange(String.format(uriWhoeid, lt, lg),
 	                                                                          HttpMethod.GET,
@@ -112,9 +109,6 @@ public class ClienteInfoService {
 	private List<MWConsolidatedWeather> getTemperatura(String woeid) {
 			
 		RestTemplate restTemplate = new RestTemplate();
-		
-		System.out.println("Vai buscar Tempetaturas. Woeid: " + woeid);
-		
 		MWTemperatureLocation dados = restTemplate.getForObject(String.format(uriTemperatura, woeid), MWTemperatureLocation.class);
 	    return dados.getWeather();
 	}
