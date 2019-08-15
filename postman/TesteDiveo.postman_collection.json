@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "9b342aeb-e8e8-4a77-8171-26556d8edb7d",
+		"name": "TesteDiveo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ipvigilante",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ipvigilante.com/179.99.148.36",
+					"protocol": "https",
+					"host": [
+						"ipvigilante",
+						"com"
+					],
+					"path": [
+						"179.99.148.36"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "metaweather - busca whoeid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.metaweather.com/api/location/search/?lattlong=-23.56670,-46.78330",
+					"protocol": "https",
+					"host": [
+						"www",
+						"metaweather",
+						"com"
+					],
+					"path": [
+						"api",
+						"location",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "lattlong",
+							"value": "-23.56670,-46.78330"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "metaweather - obtem temperaturas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.metaweather.com/api/location/455827",
+					"protocol": "https",
+					"host": [
+						"www",
+						"metaweather",
+						"com"
+					],
+					"path": [
+						"api",
+						"location",
+						"455827"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "API_",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{BearerToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/cliente/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"cliente",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindOne",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{BearerToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/cliente/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"cliente",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{BearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Jimmy James\",\n\t\"idade\": \"25\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/cliente/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"cliente",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{BearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Jimmy James da Silva\",\n\t\"idade\": 21\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/cliente/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"cliente",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{BearerToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/cliente/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"cliente",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authentication/SignIn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7aae48c2-0c83-4bdd-839b-a0e4804422de",
+						"exec": [
+							"if (responseCode.code >= 200 && responseCode.code <= 299) {",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"BearerToken\", jsonData.token);",
+							"}",
+							"else",
+							"{",
+							"    pm.environment.set(\"BearerToken\", responseCode.code);",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"{{user}}\",\n\t\"password\": \"{{password}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cliente/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cliente",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
